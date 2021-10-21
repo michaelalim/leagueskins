@@ -38,6 +38,26 @@ champList.forEach(champ => {
     img.alt = `${champ} image`
     img.classList.add("champ-img");
     card.appendChild(img);
+
+    // added name when hovering champions
+    const champHovered = document.createElement("h5");
+    champHovered.textContent = champ;
+    champHovered.classList.add("champ-hover-display");
+    card.appendChild(champHovered);
+
+    // hover adds this attributes, some of these doesn't really work on css
+    card.addEventListener("mouseover", () => {
+        champHovered.style.display = "inline-block";
+        img.style.opacity = "0.35";
+        img.style.transform = "scale(92.5%)";
+
+        card.addEventListener("mouseleave", () => {
+            champHovered.style.display = "none";
+            img.style.opacity = "1";
+            img.style.transform = "scale(100%)";
+        })
+    })
+    
     
 })
 
@@ -136,16 +156,19 @@ for (let i = 0; i < champList.length; i++){
         mainInfoContainer.appendChild(navContainer);
 
         // navigations
+        // info navigation
         const infoNav = document.createElement("h6");
         infoNav.textContent = "INFO";
         infoNav.classList.add("moda-nav", "current-nav");
         navContainer.appendChild(infoNav); 
 
+        // skills navigation
         const skillsNav = document.createElement("h6");
         skillsNav.textContent = "SKILLS";
         skillsNav.classList.add("moda-nav");
         navContainer.appendChild(skillsNav);
 
+        // skins navigation
         const skinsNav = document.createElement("h6");
         skinsNav.textContent = "SKINS";
         skinsNav.classList.add("moda-nav");

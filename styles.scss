@@ -76,7 +76,22 @@ body{
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
 }
 
+.champ-hover-display{
+    position: absolute;
+    color: white;
+    z-index: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    display: none;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
 /* 3a. champions */
+.champions-card{
+    position: relative;
+}
+
 .champions-card,
 .champ-img{
     height: 75px;

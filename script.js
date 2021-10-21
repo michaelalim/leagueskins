@@ -1,187 +1,254 @@
-const champions = [
-    {champion: "aatrox", image: "aatrox.png"},
-    {champion: "ahri", image: "ahri.png"},
-    {champion: "akali", image: "akali.png"},
-    {champion: "akshan", image: "akshan.png"},
-    {champion: "alistar", image: "alistar.jpg"},
-    {champion: "amumu", image: "amumu.jpg"},
-    {champion: "anivia", image: "anivia.png"},
-    {champion: "annie", image: "annie.png"},
-    {champion: "aphelios", image: "aphelios.webp"},
-    {champion: "ashe", image: "ashe.png"},
-    {champion: "aurelion sol", image: "aurelionSol.png"},
-    {champion: "azir", image: "azir.png"},
-    {champion: "bard", image: "bard.webp"},
-    {champion: "blitzcrank", image: "blitzcrank.png"},
-    {champion: "brand", image: "brand.png"},
-    {champion: "braum", image: "braum.png"},
-    {champion: "caitlyn", image: "caitlyn.png"},
-    {champion: "camille", image: "camille.png"},
-    {champion: "cassiopeia", image: "cassiopeia.png"},
-    {champion: "chogath", image: "chogath.png"}, 
-    {champion: "corki", image: "corki.webp"},
-    {champion: "darius", image: "darius.png"},
-    {champion: "diana", image: "diana.png"},
-    {champion: "draven", image: "draven.png"},
-    {champion: "dr mundo", image: "drMundo.png"},
-    {champion: "ekko", image: "ekko.png"},
-    {champion: "elise", image: "elise.png"},
-    {champion: "evelynn", image: "evelynn.png"},
-    {champion: "ezreal", image: "ezreal.png"},
-    {champion: "fiddlesticks", image: "fiddlesticks.webp"},
-    {champion: "fiora", image: "fiora.png"},
-    {champion: "fizz", image: "fizz.png"},
-    {champion: "galio", image: "galio.webp"},
-    {champion: "gangplank", image: "gangplank.webp"},
-    {champion: "garen", image: "garen.png"},
-    {champion: "gnar", image: "gnar.webp"},
-    {champion: "gragas", image: "gragas.png"},
-    {champion: "graves", image: "graves.png"},
-    {champion: "gwen", image: "gwen.webp"},
-    {champion: "hecarim", image: "hecarim.png"},
-    {champion: "heimerdinger", image: "heimerdinger.webp"},
-    {champion: "illaoi", image: "illaoi.png"},
-    {champion: "irelia", image: "irelia.webp"},
-    {champion: "ivern", image: "ivern.png"},
-    {champion: "janna", image: "janna.png"},
-    {champion: "jarvan iv", image: "jarvan.webp"},
-    {champion: "jax", image: "jax.webp"},
-    {champion: "jayce", image: "jayce.png"},
-    {champion: "jhin", image: "jhin.jpg"},
-    {champion: "jinx", image: "jinx.webp"},
-    {champion: "kaisa", image: "kaisa.jpg"},
-    {champion: "kalista", image: "kalista.png"},
-    {champion: "karma", image: "karma.webp"},
-    {champion: "karthus", image: "karthus.webp"},
-    {champion: "kassadin", image: "kassadin.png"},
-    {champion: "katarina", image: "katarina.png"},
-    {champion: "kayle", image: "kayle.png"},
-    {champion: "kayn", image: "kayn.jpg"},
-    {champion: "kennen", image: "kennen.png"},
-    {champion: "khazix", image: "khazix.webp"},
-    {champion: "kindred", image: "kindred.jpg"},
-    {champion: "kled", image: "kled.webp"},
-    {champion: "kogmaw", image: "kogmaw.jpg"},
-    {champion: "leblanc", image: "leblanc.png"},
-    {champion: "lee sin", image: "leeSin.webp"},
-    {champion: "leona", image: "leona.png"},
-    {champion: "lillia", image: "lillia.webp"},
-    {champion: "lissandra", image: "lissandra.jpg"},
-    {champion: "lucian", image: "lucian.png"},
-    {champion: "lulu", image: "lulu.jpg"},
-    {champion: "lux", image: "lux.png"},
-    {champion: "malphite", image: "malphite.webp"},
-    {champion: "malzahar", image: "malzahar.webp"},
-    {champion: "maokai", image: "maokai.png"},
-    {champion: "master yi", image: "masterYi.png"},
-    {champion: "miss fortune", image: "missFortune.png"},
-    {champion: "mordekaiser", image: "mordekaiser.jpg"},
-    {champion: "morgana", image: "morgana.jpg"},
-    {champion: "nami", image: "nami.png"},
-    {champion: "nasus", image: "nasus.webp"},
-    {champion: "nautilus", image: "nautilus.jpg"},
-    {champion: "neeko", image: "neeko.png"},
-    {champion: "nidalee", image: "nidalee.png"},
-    {champion: "nocturne", image: "nocturne.png"},
-    {champion: "nunu and willump", image: "nunu.webp"},
-    {champion: "olaf", image: "olaf.png"},
-    {champion: "orianna", image: "orianna.png"},
-    {champion: "ornn", image: "ornn.png"},
-    {champion: "pantheon", image: "pantheon.webp"},
-    {champion: "poppy", image: "poppy.webp"},
-    {champion: "pyke", image: "pyke.webp"},
-    {champion: "qiyana", image: "qiyana.webp"},
-    {champion: "quinn", image: "quinn.png"},
-    {champion: "rakan", image: "rakan.png"},
-    {champion: "rammus", image: "rammus.png"},
-    {champion: "reksai", image: "reksai.png"},
-    {champion: "rell", image: "rell.webp"},
-    {champion: "renekton", image: "renekton.png"},
-    {champion: "rengar", image: "rengar.png"},
-    {champion: "riven", image: "riven.png"},
-    {champion: "rumble", image: "rumble.webp"},
-    {champion: "ryze", image: "ryze.png"},
-    {champion: "samira", image: "samira.webp"},
-    {champion: "sejuani", image: "sejuani.png"},
-    {champion: "senna", image: "senna.jpg"},
-    {champion: "seraphine", image: "seraphine.webp"},
-    {champion: "sett", image: "sett.webp"},
-    {champion: "shaco", image: "shaco.png"},
-    {champion: "shen", image: "shen.png"},
-    {champion: "shyvana", image: "shyvana.webp"},
-    {champion: "singed", image: "singed.png"},
-    {champion: "sion", image: "sion.png"},
-    {champion: "sivir", image: "sivir.png"},
-    {champion: "skarner", image: "skarner.png"},
-    {champion: "sona", image: "sona.png"},
-    {champion: "soraka", image: "soraka.png"},
-    {champion: "swain", image: "swain.jpg"},
-    {champion: "sylas", image: "sylas.png"},
-    {champion: "syndra", image: "syndra.png"},
-    {champion: "tahm kench", image: "tahmKench.webp"},
-    {champion: "taliyah", image: "taliyah.jpg"},
-    {champion: "talon", image: "talon.webp"},
-    {champion: "taric", image: "taric.jpg"},
-    {champion: "teemo", image: "teemo.png"},
-    {champion: "thresh", image: "thresh.jpg"},
-    {champion: "tristana", image: "tristana.jpg"},
-    {champion: "trundle", image: "trundle.png"},
-    {champion: "tryndamere", image: "tryndamere.jpg"},
-    {champion: "twistedFate", image: "twistedFate.jpg"},
-    {champion: "twitch", image: "twitch.webp"},
-    {champion: "udyr", image: "udyr.jpg"},
-    {champion: "urgot", image: "urgot.webp"},
-    {champion: "varus", image: "varus.png"},
-    {champion: "vayne", image: "vayne.png"},
-    {champion: "veigar", image: "veigar.jpg"},
-    {champion: "velkoz", image: "velkoz.jpg"},
-    {champion: "vi", image: "vi.png"},
-    {champion: "viego", image: "viego.webp"},
-    {champion: "viktor", image: "viktor.png"},
-    {champion: "vladimir", image: "vladimir.png"},
-    {champion: "volibear", image: "volibear.png"},
-    {champion: "warwick", image: "warwick.png"},
-    {champion: "wukong", image: "wukong.png"},
-    {champion: "xayah", image: "xayah.jpg"},
-    {champion: "xerath", image: "xerath.png"},
-    {champion: "xin zhao", image: "xinZhao.webp"},
-    {champion: "yasuo", image: "yasuo.png"},
-    {champion: "yone", image: "yone.webp"},
-    {champion: "yorick", image: "yorick.webp"},
-    {champion: "yuumi", image: "yuumi.png"},
-    {champion: "zac", image: "zac.png"},
-    {champion: "zed", image: "zed.png"},
-    {champion: "ziggs", image: "ziggs.png"},
-    {champion: "zilean", image: "zilean.png"},
-    {champion: "zoe", image: "zoe.webp"},
-    {champion: "zyra", image: "zyra.webp"}
+// API site
+// https://developer.riotgames.com/docs/lol?fbclid=IwAR3D22UnmVfDdZVB-3HrZrl-ty3NlLFU6b_Q_lm3j8TrZz1X2XDR-T-k2xE#data-dragon_champion-splash-art
+
+//champion list --- generally only used for the names and the number of champions present in game 
+// if i were to find a way to know the length of the API of have an API as an array instead of just pure objects, then this wouldn't be needed.
+const champList = [
+    `Aatrox`,
+    `Ahri`,
+    `Akali`,
+    `Akshan`,
+    `Alistar`,
+    `Amumu`,
+    `Anivia`,
+    `Annie`,
+    `Aphelios`,
+    `Ashe`,
+    `AurelionSol`,
+    `Azir`,
+    `Bard`,
+    `Blitzcrank`,
+    `Brand`,
+    `Braum`,
+    `Caitlyn`,
+    `Camille`,
+    `Cassiopeia`,
+    `Chogath`,
+    `Corki`,
+    `Darius`,
+    `Diana`,
+    `Draven`,
+    `DrMundo`,
+    `Ekko`,
+    `Elise`,
+    `Evelynn`,
+    `Ezreal`,
+    `Fiddlesticks`,
+    `Fiora`,
+    `Fizz`,
+    `Galio`,
+    `Gangplank`,
+    `Garen`,
+    `Gnar`,
+    `Gragas`,
+    `Graves`,
+    `Gwen`,
+    `Hecarim`,
+    `Heimerdinger`,
+    `Illaoi`,
+    `Irelia`,
+    `Ivern`,
+    `Janna`,
+    `JarvanIV`,
+    `Jax`,
+    `Jayce`,
+    `Jhin`,
+    `Jinx`,
+    `Kaisa`,
+    `Kalista`,
+    `Karma`,
+    `Karthus`,
+    `Kassadin`,
+    `Katarina`,
+    `Kayle`,
+    `Kayn`,
+    `Kennen`,
+    `Khazix`,
+    `Kindred`,
+    `Kled`,
+    `KogMaw`,
+    `Leblanc`,
+    `LeeSin`,
+    `Leona`,
+    `Lillia`,
+    `Lissandra`,
+    `Lucian`,
+    `Lulu`,
+    `Lux`,
+    `Malphite`,
+    `Malzahar`,
+    `Maokai`,
+    `MasterYi`,
+    `MissFortune`,
+    `MonkeyKing`,
+    `Mordekaiser`,
+    `Morgana`,
+    `Nami`,
+    `Nasus`,
+    `Nautilus`,
+    `Neeko`,
+    `Nidalee`,
+    `Nocturne`,
+    `Nunu`,
+    `Olaf`,
+    `Orianna`,
+    `Ornn`,
+    `Pantheon`,
+    `Poppy`,
+    `Pyke`,
+    `Qiyana`,
+    `Quinn`,
+    `Rakan`,
+    `Rammus`,
+    `RekSai`,
+    `Rell`,
+    `Renekton`,
+    `Rengar`,
+    `Riven`,
+    `Rumble`,
+    `Ryze`,
+    `Samira`,
+    `Sejuani`,
+    `Senna`,
+    `Seraphine`,
+    `Sett`,
+    `Shaco`,
+    `Shen`,
+    `Shyvana`,
+    `Singed`,
+    `Sion`,
+    `Sivir`,
+    `Skarner`,
+    `Sona`,
+    `Soraka`,
+    `Swain`,
+    `Sylas`,
+    `Syndra`,
+    `TahmKench`,
+    `Taliyah`,
+    `Talon`,
+    `Taric`,
+    `Teemo`,
+    `Thresh`,
+    `Tristana`,
+    `Trundle`,
+    `Tryndamere`,
+    `TwistedFate`,
+    `Twitch`,
+    `Udyr`,
+    `Urgot`,
+    `Varus`,
+    `Vayne`,
+    `Veigar`,
+    `Velkoz`,
+    `Vex`,
+    `Vi`,
+    `Viego`,
+    `Viktor`,
+    `Vladimir`,
+    `Volibear`,
+    `Warwick`,
+    `Xayah`,
+    `Xerath`,
+    `XinZhao`,
+    `Yasuo`,
+    `Yone`,
+    `Yorick`,
+    `Yuumi`,
+    `Zac`,
+    `Zed`,
+    `Ziggs`,
+    `Zilean`,
+    `Zoe`,
+    `Zyra`
 ]
 
+// ------------------------ MAIN PAGE --------------------------------
+
+// container div --- used for the 75x75 champion images on the main page
 const container = document.getElementById("container");
+
+// search bar
 const searchBar = document.getElementById("search-bar");
 
-champions.forEach(champ => {
+// body tag used for the modal
+const screen = document.getElementsByTagName("body")[0];
+
+
+// the 75x75 images in the body of main page
+champList.forEach(champ => {
+
+    // card holder of images
     const card = document.createElement("div");
     card.classList.add("champions-card");
-    card.setAttribute("id", champ.champion);
+    card.setAttribute("id", champ);
     container.appendChild(card);
 
+    // images
     const img = document.createElement("img");
-    img.src = `./champions/${champ.image}`;
+    img.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/champion/${champ}.png`;
     img.classList.add("champ-img");
     card.appendChild(img);
+    
 })
 
+// ------------------------ SEARCH BAR --------------------------------
+// the divs --- also the cards from above --- used for the search queries
 const championList = document.getElementsByClassName("champions-card");
 
+// search-bar function
 searchBar.addEventListener("keyup", (event) => {
+    // getting the string from the search-bar
     let searchQueue = event.target.value.toLowerCase();
 
-    for (let i = 0; i < championList.length; i++){
-        if (!champions[i].champion.includes(searchQueue)){
+    // filter --- always remember to use toLowerCase() so the string would match when filtering
+    for (let i = 0; i < champList.length; i++){
+        if (!champList[i].toLowerCase().includes(searchQueue)){
             championList[i].style.display = "none";
         } else {
             championList[i].style.display = "block";
         }
     }
 })
+
+// ------------------------ MODAL AREA --------------------------------
+// container for modal
+const champInfoContainer = document.createElement("div");
+champInfoContainer.classList.add("champ-info");
+screen.appendChild(champInfoContainer);
+
+// ~~~~~~~~~~~~~~~~~~~~~~~ CHAMPION INFO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// modal displays --- gathering and displaying info
+for (let i = 0; i < champList.length; i++){
+    // event when a certain champion is clicked on the main page
+    championList[i].addEventListener("click", () => {
+        // clearing the previous display assuming there's a display beforehand, so new items will display
+        champInfoContainer.textContent = "";
+
+        // main "display" of the container is none, means it is hidden at first, this will show the container
+        champInfoContainer.style.display = "block";
+
+        // img of champion
+        const champImg = document.createElement("img");
+        champImg.classList.add("champ-info-img");
+        champImg.src = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champList[i]}_0.jpg`;
+        champInfoContainer.appendChild(champImg);
+
+        // using fetch to display the lore from the page (LINK AT LINE 2)
+        (async function (){
+            // fetching data from the link
+            const req = await fetch("http://ddragon.leagueoflegends.com/cdn/11.21.1/data/en_US/champion.json");
+            const json = await req.json();
+            // .blurb is the lore
+            const champ = json.data[champList[i]].blurb;
+
+            // lore display using p
+           const lore = document.createElement("p");
+           lore.textContent = champ;
+           lore.style.color = "white";
+           lore.style.fontSize = "24px";
+           lore.style.fontWeight = "900";
+           champInfoContainer.appendChild(lore);
+        })()
+    })
+}

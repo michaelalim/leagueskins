@@ -115,13 +115,139 @@ body {
 }
 
 /* 4. modal 1 --- general info of each champion */
+/* We should have here an image, lore, info (atk def etc.), display of skills, navigation between info-page, skill modal page, and skins page --- all in modal */
 .champ-info {
   background: #00000099;
   position: fixed;
   height: 100vh;
   width: 100vw;
   inset: 0;
-  display: none;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 Min(100px, 2vw);
+  -webkit-box-shadow: 0 0 10px 5px #ffffff80;
+          box-shadow: 0 0 10px 5px #ffffff80;
+}
+
+.champ-info-img {
+  margin: 0;
+  height: Min(50vw, 560px);
+  width: Min(30vw, 300px);
+}
+
+/* main info --- the right side of info page */
+.main-info-container {
+  height: Min(100vw, 560px);
+  width: calc(100% - (Min(30vw, 300px)));
+  background: #33333399;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 50px;
+}
+
+/* champ name*/
+.champ-info-name {
+  color: #ffffff;
+  font-size: 2.5rem;
+  margin: 0 0 30px;
+  -webkit-box-shadow: 0 0 3px #ffffff15;
+          box-shadow: 0 0 3px #ffffff15;
+}
+
+/* nav */
+.nav-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.moda-nav {
+  font-size: 1rem;
+  color: #000000;
+  display: inline-block;
+  background: #777777;
+  padding: 10px 23.5px;
+  border-radius: 20px;
+}
+
+.moda-nav:hover,
+.moda-nav:focus {
+  color: #ffffff;
+  cursor: pointer;
+  background: #000000;
+}
+
+.current-nav {
+  color: #ffffff;
+  background: #000000;
+}
+
+.lore-text {
+  color: #bbbbbb;
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-align: justify;
+  outline: none;
+  text-indent: 3rem;
+  line-height: 1.5rem;
+}
+
+.lore-text:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.champ-info-skills-container {
+  margin: 30px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 35px;
+  right: 40px;
+  padding: 5px 12.5px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #000000;
+  color: #ffffff;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  opacity: 0.5;
+  -webkit-box-shadow: 0 0 3px #00000050;
+          box-shadow: 0 0 3px #00000050;
+}
+
+.close-modal-btn:hover {
+  cursor: pointer;
+  opacity: 0.95;
 }
 
 /* z. media queries */

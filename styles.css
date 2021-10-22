@@ -140,15 +140,14 @@ body {
   inset: 0;
   -webkit-transform: translateY(100%);
           transform: translateY(100%);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  display: -ms-grid;
+  display: grid;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-grid-columns: Min(30vw, 310px) calc(100vw - (Min(30vw, 310px)));
+      grid-template-columns: Min(30vw, 310px) calc(100vw - (Min(30vw, 310px)));
+      grid-template-areas: "image info";
   padding: 0 Min(100px, 2vw);
   -webkit-box-shadow: 0 0 10px 5px #ffffff80;
           box-shadow: 0 0 10px 5px #ffffff80;
@@ -156,14 +155,21 @@ body {
 
 .champ-info-img {
   margin: 0;
-  height: Min(50vw, 560px);
-  width: Min(30vw, 300px);
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: image;
+  width: Min(30vw, 310px);
+  height: Min(54vw, 560px);
+}
+
+.champ-info-img-small {
+  display: none;
 }
 
 /* main info --- the right side of info page */
 .main-info-container {
   height: Min(100vw, 560px);
-  width: calc(100% - (Min(30vw, 300px)));
+  width: calc(100vw - (Min(30vw, 310px)));
   background: #33333399;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -172,16 +178,24 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 50px;
+  padding: 30px 80px 30px 40px;
+  overflow: auto;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: info;
 }
 
 /* champ name*/
 .champ-info-name {
   color: #ffffff;
-  font-size: 2.5rem;
-  margin: 0 0 30px;
-  -webkit-box-shadow: 0 0 3px #ffffff15;
-          box-shadow: 0 0 3px #ffffff15;
+  font-size: Clamp(1.4rem, 3.5vw, 2.5rem);
+  margin: 0;
+}
+
+.champ-info-title {
+  font-size: Clamp(0.8rem, 1.5vw, 1.5rem);
+  color: #bbbbbb;
+  margin: 5px 0 10px;
 }
 
 /* nav */
@@ -220,9 +234,10 @@ body {
   background: #000000;
 }
 
+/* body of info modal */
 .lore-text {
   color: #bbbbbb;
-  font-size: 0.9rem;
+  font-size: Clamp(0.75rem, 1.7vw, 1.2rem);
   font-weight: 900;
   text-align: justify;
   outline: none;
@@ -241,6 +256,10 @@ body {
   display: -ms-flexbox;
   display: flex;
   gap: 20px;
+}
+
+.champ-info-skill-img {
+  height: Max(50px, 4vw);
 }
 
 .close-modal-btn {
@@ -278,6 +297,37 @@ body {
   .search {
     width: Min(220px, 30vw);
     margin-left: 10px;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .champ-info {
+    -ms-grid-rows: Min(30vw, 310px) calc(100vh - (Min(30vw, 310px)));
+        grid-template-rows: Min(30vw, 310px) calc(100vh - (Min(30vw, 310px)));
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "image" "info";
+  }
+  .champ-info-img {
+    display: none;
+  }
+  .champ-info-img-small {
+    display: block;
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: image;
+    height: Min(30vw, 310px);
+    width: 50vw;
+    -ms-grid-column-align: center;
+        justify-self: center;
+  }
+  .main-info-container {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: info;
+    width: 100vw;
+    height: calc(100vh - (Min(30vw, 310px)));
+    bottom: 0;
   }
 }
 /*# sourceMappingURL=styles.css.map */

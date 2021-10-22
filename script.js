@@ -1,4 +1,4 @@
-// API site
+// API link
 // https://developer.riotgames.com/docs/lol?fbclid=IwAR3D22UnmVfDdZVB-3HrZrl-ty3NlLFU6b_Q_lm3j8TrZz1X2XDR-T-k2xE#data-dragon_champion-splash-art
 
 //champion list --- generally only used for the names and the number of champions present in game 
@@ -29,7 +29,6 @@ champList.forEach(champ => {
     // card holder of images
     const card = document.createElement("div");
     card.classList.add("champions-card");
-    card.setAttribute("id", champ);
     container.appendChild(card);
 
     // images
@@ -45,7 +44,7 @@ champList.forEach(champ => {
     champHovered.classList.add("champ-hover-display");
     card.appendChild(champHovered);
 
-    // hover adds this attributes, some of these doesn't really work on css
+    // hover adds this attributes, some of these doesn't really work on css cause hovering on the name would brighten the div/img instead. there could be a better way of doing this.
     card.addEventListener("mouseover", () => {
         champHovered.style.display = "inline-block";
         img.style.opacity = "0.35";
@@ -57,8 +56,6 @@ champList.forEach(champ => {
             img.style.transform = "scale(100%)";
         })
     })
-    
-    
 })
 
 // ------------------------ SEARCH BAR --------------------------------
@@ -96,6 +93,15 @@ for (let i = 0; i < champList.length; i++){
         searchBar.style.opacity = "0.3";
         searchLabel.style.opacity = "0.3";
 
+        //code for not allowing scroll outside the modal
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    
+            // if any scroll is attempted, set this to the previous value
+            window.onscroll = function() {
+                window.scrollTo(scrollLeft, scrollTop);
+            }
+
         // default translation is 100% Y which means it's not displayed inside of the user's screen. By clicking a particular champion on main page, the modal will then show
         champInfoContainer.style.transform = "translateY(0)";
 
@@ -114,6 +120,13 @@ for (let i = 0; i < champList.length; i++){
         champImg.alt = champList[i];
         champInfoContainer.appendChild(champImg);
 
+        // hidden img of champion @ modal. this image should show up when the viewport is below 600px
+        const champImgSmall = document.createElement("img");
+        champImgSmall.classList.add("champ-info-img-small");
+        champImgSmall.src = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champList[i]}_0.jpg`;
+        champImgSmall.alt = champList[i];
+        champInfoContainer.appendChild(champImgSmall);
+
         // close modal button
         const closeModalBtn = document.createElement("button");
         closeModalBtn.classList.add("close-modal-btn", "material-icons-outlined");
@@ -126,6 +139,9 @@ for (let i = 0; i < champList.length; i++){
             champInfoContainer.style.transform = "translateY(100%)";
             searchBar.style.opacity = "1";
             searchLabel.style.opacity = "1";
+
+            // cancelling out the function to allow scrolling again
+            window.onscroll = function(){};
         });
 
         // container for the right side of info-modal
@@ -133,21 +149,6 @@ for (let i = 0; i < champList.length; i++){
         const mainInfoContainer = document.createElement("div");
         mainInfoContainer.classList.add("main-info-container");
         champInfoContainer.appendChild(mainInfoContainer);
-
-        // Champ name
-        ;(async function (){
-            // fetching data from the link
-            const req = await fetch(`http://ddragon.leagueoflegends.com/cdn/11.21.1/data/en_US/champion/${champList[i]}.json`);
-            const json = await req.json();
-            // .blurb is the lore's first few lines
-            const champ = json.data[champList[i]].name;
-
-            // champ name
-            const champName = document.createElement("h2");
-            champName.textContent = champ;
-            champName.classList.add("champ-info-name");
-            mainInfoContainer.appendChild(champName);
-        })();
 
         // container for navigation 
         // RIGHT DIRECTION
@@ -175,12 +176,24 @@ for (let i = 0; i < champList.length; i++){
         navContainer.appendChild(skinsNav);
 
         // using fetch to display the lore from the page (LINK AT LINE 2)
-        ;(async function (){
+        ;(async function (){            
+
             // fetching data from the link
             const req = await fetch(`http://ddragon.leagueoflegends.com/cdn/11.21.1/data/en_US/champion/${champList[i]}.json`);
             const json = await req.json();
-            // .blurb is the lore's first few lines
             const champ = json.data[champList[i]];
+
+            // champ name
+            const champName = document.createElement("h2");
+            champName.textContent = champ.name;
+            champName.classList.add("champ-info-name");
+            mainInfoContainer.appendChild(champName);
+
+            // champ title
+            const champTitle = document.createElement("span");
+            champTitle.textContent = champ.title;
+            champTitle.classList.add("champ-info-title");
+            mainInfoContainer.appendChild(champTitle);
 
             // lore display using p --- blurb being the default of the lore text content
            const lore = document.createElement("p");
@@ -204,6 +217,7 @@ for (let i = 0; i < champList.length; i++){
            // display passive
            const skillP = document.createElement("img");
            skillP.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/passive/${passive}`;
+           skillP.classList.add("champ-info-skill-img");
            skillsContainer.appendChild(skillP);
 
             // fetching and then displaying Q
@@ -211,6 +225,7 @@ for (let i = 0; i < champList.length; i++){
 
            const skillQ = document.createElement("img");
            skillQ.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchQ}`;
+           skillQ.classList.add("champ-info-skill-img");
            skillsContainer.appendChild(skillQ);
 
             // fetching and then displaying W
@@ -218,6 +233,7 @@ for (let i = 0; i < champList.length; i++){
 
            const skillW = document.createElement("img");
            skillW.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchW}`;
+           skillW.classList.add("champ-info-skill-img");
            skillsContainer.appendChild(skillW);
 
             // fetching and then displaying E
@@ -225,6 +241,7 @@ for (let i = 0; i < champList.length; i++){
 
            const skillE = document.createElement("img");
            skillE.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchE}`;
+           skillE.classList.add("champ-info-skill-img");
            skillsContainer.appendChild(skillE);
 
             // fetching and then displaying R
@@ -232,6 +249,7 @@ for (let i = 0; i < champList.length; i++){
 
            const skillR = document.createElement("img");
            skillR.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchR}`;
+           skillR.classList.add("champ-info-skill-img");
            skillsContainer.appendChild(skillR);
         })();
     })

@@ -78,10 +78,15 @@ searchBar.addEventListener("keyup", (event) => {
 })
 
 // ------------------------ MODAL AREA --------------------------------
+// added another modal because #00000099 just isn't dark enough I think
+const darkerModal = document.createElement("div");
+darkerModal.classList.add("darker-modal");
+screen.appendChild(darkerModal);
+
 // container for modal
 const champInfoContainer = document.createElement("div");
 champInfoContainer.classList.add("champ-info");
-screen.appendChild(champInfoContainer);
+darkerModal.appendChild(champInfoContainer);
 
 // ~~~~~~~~~~~~~~~~~~~~~~~ CHAMPION INFO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // modal displays --- gathering and displaying info
@@ -103,7 +108,7 @@ for (let i = 0; i < champList.length; i++){
             }
 
         // default translation is 100% Y which means it's not displayed inside of the user's screen. By clicking a particular champion on main page, the modal will then show
-        champInfoContainer.style.transform = "translateY(0)";
+        darkerModal.style.transform = "translateY(0)";
 
         // The modal view should be something like
         // PICTURE ON THE LEFT will consume almost 50% of the screen
@@ -136,7 +141,7 @@ for (let i = 0; i < champList.length; i++){
         // close modal button function
         closeModalBtn.addEventListener("click", () => {
             // hide modal, bring back searchbar's opacity
-            champInfoContainer.style.transform = "translateY(100%)";
+            darkerModal.style.transform = "translateY(100%)";
             searchBar.style.opacity = "1";
             searchLabel.style.opacity = "1";
 
@@ -206,10 +211,46 @@ for (let i = 0; i < champList.length; i++){
                lore.textContent == champ.blurb ? lore.textContent = champ.lore : lore.textContent = champ.blurb;
            });
 
+           // container for champion-tags (e.g. Fighter, Mage) and their skills
+           const champTagSkillsContainer = document.createElement("div");
+           champTagSkillsContainer.classList.add("tag-skill-container");
+           mainInfoContainer.appendChild(champTagSkillsContainer);
+
+           // tag container 
+           const tagContainer = document.createElement("div");
+           tagContainer.classList.add("tag-container");
+           champTagSkillsContainer.appendChild(tagContainer);
+
+           // tag-contents
+           const tagHeader = document.createElement("h4");
+           tagHeader.textContent = "Tags:";
+           tagHeader.classList.add("tag-header");
+           tagContainer.appendChild(tagHeader);
+
+            // fetching champ tags
+            const tagArray = champ.tags;
+
+           // DOM for champ tags looped
+           for (let i = 0; i < tagArray.length; i++){
+                const champTag = document.createElement("span");
+                champTag.textContent += tagArray[i];
+                champTag.classList.add("champ-tags");
+
+                // adding unique classes for color setting
+                if (champTag.textContent === "Support"){champTag.classList.add("tag-support")};
+                if (champTag.textContent === "Fighter"){champTag.classList.add("tag-fighter")};
+                if (champTag.textContent === "Mage"){champTag.classList.add("tag-mage")};
+                if (champTag.textContent === "Assassin"){champTag.classList.add("tag-assassin")};
+                if (champTag.textContent === "Tank"){champTag.classList.add("tag-tank")};
+                if (champTag.textContent === "Marksman"){champTag.classList.add("tag-marksman")};
+
+                tagContainer.appendChild(champTag);
+           }           
+
            // container for skills image
            const skillsContainer = document.createElement("div");
            skillsContainer.classList.add("champ-info-skills-container");
-           mainInfoContainer.appendChild(skillsContainer);
+           champTagSkillsContainer.appendChild(skillsContainer);
 
            // fetching passive
            const passive = champ.passive.image.full;

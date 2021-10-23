@@ -4,10 +4,31 @@ $light: #bbbbbb;
 $side-color: #777777;
 $content-width: Min(90vw, 750px);
 
+//roles color
+$marksman: green;
+$assassin: rgb(219, 32, 32);
+$mage: blue;
+$tank: rgb(119, 116, 69);
+$fighter: rgb(117, 30, 30);
+$support: #eee;
 
 *, *::before, *::after{
     box-sizing: border-box;
 }
+
+/* TABLE OF CONTENTS 
+    0. general
+    1. header
+    2. search-bar
+    3. body
+        a. champions
+    4. modal1
+        a. main info
+        b. champ name
+        c. nav
+        body of info modal
+    z. media queries
+*/
 
 /* 0. general ruling */
 body, html{
@@ -116,13 +137,21 @@ body{
 
 /* 4. modal 1 --- general info of each champion */
 /* We should have here an image, lore, info (atk def etc.), display of skills, navigation between info-page, skill modal page, and skins page --- all in modal */
-.champ-info{
+.darker-modal{
     background: #00000099;
     position: fixed;
     height: 100vh;
     width: 100vw;
     inset: 0;
     transform: translateY(100%);
+}
+
+.champ-info{
+    background: #00000099;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    inset: 0;
     display: grid;
     align-items: center;
     grid-template-columns: Min(30vw, 310px) calc(100vw - (Min(30vw, 310px))); 
@@ -148,11 +177,12 @@ body{
 .main-info-container{
     height: Min(100vw, 560px);
     width: calc(100vw - (Min(30vw, 310px)));
-    background: #33333399;
+    background: #00000099;
     display: flex;
     flex-direction: column;
-    padding: 30px 80px 30px 40px;
+    padding: 30px 100px 30px 40px;
     overflow: auto;
+    overflow-x: hidden;
     grid-area: info;
 }
 
@@ -173,17 +203,18 @@ body{
 .nav-container{
     display: flex;
     gap: 20px;
+    width: calc(100vw - (Min(30vw, 310px)) - 120px);
     align-items: center;
     color: white;
     justify-content: center;
 }
 
 .moda-nav{
-    font-size: 1rem;
+    font-size: Clamp(0.75rem, 1.5vw, 1rem);
     color: $dark;
     display: inline-block;
     background: $side-color;
-    padding: 10px 23.5px;
+    padding: Min(10px, 1.5vw) Min(23.5px, 3vw);
     border-radius: 20px;
 }
 
@@ -204,7 +235,6 @@ body{
     color: $light;
     font-size: Clamp(0.75rem, 1.7vw, 1.2rem);
     font-weight: 900;
-    text-align: justify;
     outline: none;
     text-indent: 3rem;
     line-height: 1.5rem;
@@ -215,14 +245,60 @@ body{
     cursor: pointer;
 }
 
+.tag-skill-container{
+    display: grid;
+    grid-template-columns: 75px 1fr;
+}
+
+.tag-container{
+    color: $light;
+}
+
+.tag-header{
+    font-size: Clamp(0.95rem, 1.7vw, 1.2rem);
+    margin: 20px 0 15px;
+}
+
+.champ-tags{
+    display: block;
+    margin: 7.5px 30px;
+    font-size: Clamp(0.75rem, 1.7vw, 1.1rem);
+    font-weight: 900;
+}
+
+.tag-support{
+    color: $support;
+}
+
+.tag-fighter{
+    color: $fighter;
+}
+
+.tag-assassin{
+    color: $assassin;
+}
+
+.tag-tank{
+    color: $tank;
+}
+
+.tag-mage{
+    color: $mage;
+}
+
+.tag-marksman{
+    color: $marksman;
+}
+
 .champ-info-skills-container{
-    margin: 30px auto;
+    margin: 50px auto;
     display: flex;
     gap: 20px;
+
 }
 
 .champ-info-skill-img{
-    height: Max(50px, 4vw);
+    width: Min(7.5vw, 50px);
 }
 
 .close-modal-btn{
@@ -263,7 +339,7 @@ body{
     }
 }
 
-@media all and (max-width: 600px){
+@media all and (max-width: 700px){
     .champ-info{
         grid-template-rows: Min(30vw, 310px) calc(100vh - (Min(30vw, 310px))); ;
         grid-template-columns: 1fr;
@@ -284,10 +360,34 @@ body{
         justify-self: center;
     }
 
+    .nav-container{
+        width: 100%;
+    }
+
     .main-info-container{
         grid-area: info;
         width: 100vw;
         height: calc(100vh - (Min(30vw, 310px)));
         bottom: 0;
+        padding: 30px 65px;
+    }
+
+    .tag-skill-container{
+        grid-template-columns: 1fr;
+    }
+
+    .tag-header{
+        display: inline-block;
+        margin-right: 1rem;
+    }
+
+    .champ-tags{
+        display: inline-block;
+        margin: 0;
+        margin: 0 .3rem;
+    }
+
+    .champ-info-skills-container{
+        margin: 20px auto;
     }
 }

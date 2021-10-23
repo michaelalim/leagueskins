@@ -3,6 +3,19 @@
           box-sizing: border-box;
 }
 
+/* TABLE OF CONTENTS 
+    0. general
+    1. header
+    2. search-bar
+    3. body
+        a. champions
+    4. modal1
+        a. main info
+        b. champ name
+        c. nav
+        body of info modal
+    z. media queries
+*/
 /* 0. general ruling */
 body, html {
   padding: 0;
@@ -132,7 +145,7 @@ body {
 
 /* 4. modal 1 --- general info of each champion */
 /* We should have here an image, lore, info (atk def etc.), display of skills, navigation between info-page, skill modal page, and skins page --- all in modal */
-.champ-info {
+.darker-modal {
   background: #00000099;
   position: fixed;
   height: 100vh;
@@ -140,6 +153,14 @@ body {
   inset: 0;
   -webkit-transform: translateY(100%);
           transform: translateY(100%);
+}
+
+.champ-info {
+  background: #00000099;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  inset: 0;
   display: -ms-grid;
   display: grid;
   -webkit-box-align: center;
@@ -170,7 +191,7 @@ body {
 .main-info-container {
   height: Min(100vw, 560px);
   width: calc(100vw - (Min(30vw, 310px)));
-  background: #33333399;
+  background: #00000099;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -178,8 +199,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 30px 80px 30px 40px;
+  padding: 30px 100px 30px 40px;
   overflow: auto;
+  overflow-x: hidden;
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: info;
@@ -204,6 +226,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   gap: 20px;
+  width: calc(100vw - (Min(30vw, 310px)) - 120px);
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -214,11 +237,11 @@ body {
 }
 
 .moda-nav {
-  font-size: 1rem;
+  font-size: Clamp(0.75rem, 1.5vw, 1rem);
   color: #000000;
   display: inline-block;
   background: #777777;
-  padding: 10px 23.5px;
+  padding: Min(10px, 1.5vw) Min(23.5px, 3vw);
   border-radius: 20px;
 }
 
@@ -239,7 +262,6 @@ body {
   color: #bbbbbb;
   font-size: Clamp(0.75rem, 1.7vw, 1.2rem);
   font-weight: 900;
-  text-align: justify;
   outline: none;
   text-indent: 3rem;
   line-height: 1.5rem;
@@ -250,8 +272,55 @@ body {
   cursor: pointer;
 }
 
+.tag-skill-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 75px 1fr;
+      grid-template-columns: 75px 1fr;
+}
+
+.tag-container {
+  color: #bbbbbb;
+}
+
+.tag-header {
+  font-size: Clamp(0.95rem, 1.7vw, 1.2rem);
+  margin: 20px 0 15px;
+}
+
+.champ-tags {
+  display: block;
+  margin: 7.5px 30px;
+  font-size: Clamp(0.75rem, 1.7vw, 1.1rem);
+  font-weight: 900;
+}
+
+.tag-support {
+  color: #eee;
+}
+
+.tag-fighter {
+  color: #751e1e;
+}
+
+.tag-assassin {
+  color: #db2020;
+}
+
+.tag-tank {
+  color: #777445;
+}
+
+.tag-mage {
+  color: blue;
+}
+
+.tag-marksman {
+  color: green;
+}
+
 .champ-info-skills-container {
-  margin: 30px auto;
+  margin: 50px auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -259,7 +328,7 @@ body {
 }
 
 .champ-info-skill-img {
-  height: Max(50px, 4vw);
+  width: Min(7.5vw, 50px);
 }
 
 .close-modal-btn {
@@ -300,7 +369,7 @@ body {
   }
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 700px) {
   .champ-info {
     -ms-grid-rows: Min(30vw, 310px) calc(100vh - (Min(30vw, 310px)));
         grid-template-rows: Min(30vw, 310px) calc(100vh - (Min(30vw, 310px)));
@@ -321,6 +390,9 @@ body {
     -ms-grid-column-align: center;
         justify-self: center;
   }
+  .nav-container {
+    width: 100%;
+  }
   .main-info-container {
     -ms-grid-row: 2;
     -ms-grid-column: 1;
@@ -328,6 +400,23 @@ body {
     width: 100vw;
     height: calc(100vh - (Min(30vw, 310px)));
     bottom: 0;
+    padding: 30px 65px;
+  }
+  .tag-skill-container {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  .tag-header {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+  .champ-tags {
+    display: inline-block;
+    margin: 0;
+    margin: 0 .3rem;
+  }
+  .champ-info-skills-container {
+    margin: 20px auto;
   }
 }
 /*# sourceMappingURL=styles.css.map */

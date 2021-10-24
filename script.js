@@ -156,6 +156,7 @@ for (let i = 0; i < champList.length; i++){
         champInfoContainer.appendChild(mainInfoContainer);
 
         function showPreface(){
+            mainInfoContainer.textContent = "";
             // container for navigation 
             // RIGHT DIRECTION
             const navContainer = document.createElement("div");
@@ -181,28 +182,42 @@ for (let i = 0; i < champList.length; i++){
             skinsNav.classList.add("moda-nav");
             navContainer.appendChild(skinsNav);
 
-            infoNav.addEventListener("click", () => {
+            // CAN'T TRANSFER CURRENT-NAV CLASS FOR SOME REASON :))))))))))))
+            // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+
+            infoNav.addEventListener("click", infoBtn);
+            skillsNav.addEventListener("click", skillBtn);
+            skinsNav.addEventListener("click", skinsBtn);
+
+            function infoBtn(){
+                showPreface();
                 infoNav.classList.add("current-nav");
                 skillsNav.classList.remove("current-nav");
                 skinsNav.classList.remove("current-nav");
-                mainInfoContainer.textContent = "";
-                showPreface();
                 showInfo();
-            })
-
-            skillsNav.addEventListener("click", () => {
+                
+            };
+            
+            function skillBtn(){
+                showPreface();
                 infoNav.classList.remove("current-nav");
                 skillsNav.classList.add("current-nav");
                 skinsNav.classList.remove("current-nav");
-            })
+                showSkills();
+                
+            };
 
-            skinsNav.addEventListener("click", () => {
+            function skinsBtn(){
+                showPreface();
+                showSkins();
                 infoNav.classList.remove("current-nav");
                 skillsNav.classList.remove("current-nav");
                 skinsNav.classList.add("current-nav");
-            })
+            };
         };
 
+        // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+        
         showPreface();
         showInfo();
 
@@ -321,5 +336,5 @@ for (let i = 0; i < champList.length; i++){
             skillsContainer.appendChild(skillR);
             })();
         }
-    })
-}
+    });
+};

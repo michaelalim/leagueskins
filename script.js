@@ -155,33 +155,60 @@ for (let i = 0; i < champList.length; i++){
         mainInfoContainer.classList.add("main-info-container");
         champInfoContainer.appendChild(mainInfoContainer);
 
-        // container for navigation 
-        // RIGHT DIRECTION
-        const navContainer = document.createElement("div");
-        navContainer.classList.add("nav-container");
-        mainInfoContainer.appendChild(navContainer);
+        function showPreface(){
+            // container for navigation 
+            // RIGHT DIRECTION
+            const navContainer = document.createElement("div");
+            navContainer.classList.add("nav-container");
+            mainInfoContainer.appendChild(navContainer);
 
-        // navigations
-        // info navigation
-        const infoNav = document.createElement("h6");
-        infoNav.textContent = "INFO";
-        infoNav.classList.add("moda-nav", "current-nav");
-        navContainer.appendChild(infoNav); 
+            // navigations
+            // info navigation
+            const infoNav = document.createElement("h6");
+            infoNav.textContent = "INFO";
+            infoNav.classList.add("moda-nav", "current-nav");
+            navContainer.appendChild(infoNav); 
 
-        // skills navigation
-        const skillsNav = document.createElement("h6");
-        skillsNav.textContent = "SKILLS";
-        skillsNav.classList.add("moda-nav");
-        navContainer.appendChild(skillsNav);
+            // skills navigation
+            const skillsNav = document.createElement("h6");
+            skillsNav.textContent = "SKILLS";
+            skillsNav.classList.add("moda-nav");
+            navContainer.appendChild(skillsNav);
 
-        // skins navigation
-        const skinsNav = document.createElement("h6");
-        skinsNav.textContent = "SKINS";
-        skinsNav.classList.add("moda-nav");
-        navContainer.appendChild(skinsNav);
+            // skins navigation
+            const skinsNav = document.createElement("h6");
+            skinsNav.textContent = "SKINS";
+            skinsNav.classList.add("moda-nav");
+            navContainer.appendChild(skinsNav);
 
-        // using fetch to display the lore from the page (LINK AT LINE 2)
-        ;(async function (){            
+            infoNav.addEventListener("click", () => {
+                infoNav.classList.add("current-nav");
+                skillsNav.classList.remove("current-nav");
+                skinsNav.classList.remove("current-nav");
+                mainInfoContainer.textContent = "";
+                showPreface();
+                showInfo();
+            })
+
+            skillsNav.addEventListener("click", () => {
+                infoNav.classList.remove("current-nav");
+                skillsNav.classList.add("current-nav");
+                skinsNav.classList.remove("current-nav");
+            })
+
+            skinsNav.addEventListener("click", () => {
+                infoNav.classList.remove("current-nav");
+                skillsNav.classList.remove("current-nav");
+                skinsNav.classList.add("current-nav");
+            })
+        };
+
+        showPreface();
+        showInfo();
+
+        function showInfo(){
+            // using fetch to display the lore from the page (LINK AT LINE 2)
+            ;(async function (){            
 
             // fetching data from the link
             const req = await fetch(`http://ddragon.leagueoflegends.com/cdn/11.21.1/data/en_US/champion/${champList[i]}.json`);
@@ -201,97 +228,98 @@ for (let i = 0; i < champList.length; i++){
             mainInfoContainer.appendChild(champTitle);
 
             // lore display using p --- blurb being the default of the lore text content
-           const lore = document.createElement("p");
-           lore.classList.add("lore-text");
-           lore.textContent = champ.blurb;
-           mainInfoContainer.appendChild(lore);
+            const lore = document.createElement("p");   
+            lore.classList.add("lore-text");
+            lore.textContent = champ.blurb;
+            mainInfoContainer.appendChild(lore);
 
-           // see more see less function
-           lore.addEventListener("click", () => {
-               lore.textContent == champ.blurb ? lore.textContent = champ.lore : lore.textContent = champ.blurb;
-           });
+            // see more see less function
+            lore.addEventListener("click", () => {
+                lore.textContent == champ.blurb ? lore.textContent = champ.lore : lore.textContent = champ.blurb;
+            });
 
-           // container for champion-tags (e.g. Fighter, Mage) and their skills
-           const champTagSkillsContainer = document.createElement("div");
-           champTagSkillsContainer.classList.add("tag-skill-container");
-           mainInfoContainer.appendChild(champTagSkillsContainer);
+            // container for champion-tags (e.g. Fighter, Mage) and their skills
+            const champTagSkillsContainer = document.createElement("div");
+            champTagSkillsContainer.classList.add("tag-skill-container");
+            mainInfoContainer.appendChild(champTagSkillsContainer);
 
-           // tag container 
-           const tagContainer = document.createElement("div");
-           tagContainer.classList.add("tag-container");
-           champTagSkillsContainer.appendChild(tagContainer);
+            // tag container 
+            const tagContainer = document.createElement("div");
+            tagContainer.classList.add("tag-container");
+            champTagSkillsContainer.appendChild(tagContainer);
 
-           // tag-contents
-           const tagHeader = document.createElement("h4");
-           tagHeader.textContent = "Tags:";
-           tagHeader.classList.add("tag-header");
-           tagContainer.appendChild(tagHeader);
+            // tag-contents
+            const tagHeader = document.createElement("h4");
+            tagHeader.textContent = "Tags:";
+            tagHeader.classList.add("tag-header");
+            tagContainer.appendChild(tagHeader);
 
-            // fetching champ tags
-            const tagArray = champ.tags;
+                // fetching champ tags
+                const tagArray = champ.tags;
 
-           // DOM for champ tags looped
-           for (let i = 0; i < tagArray.length; i++){
-                const champTag = document.createElement("span");
-                champTag.textContent += tagArray[i];
-                champTag.classList.add("champ-tags");
+            // DOM for champ tags looped
+            for (let i = 0; i < tagArray.length; i++){
+                    const champTag = document.createElement("span");
+                    champTag.textContent += tagArray[i];
+                    champTag.classList.add("champ-tags");
 
-                // adding unique classes for color setting
-                if (champTag.textContent === "Support"){champTag.classList.add("tag-support")};
-                if (champTag.textContent === "Fighter"){champTag.classList.add("tag-fighter")};
-                if (champTag.textContent === "Mage"){champTag.classList.add("tag-mage")};
-                if (champTag.textContent === "Assassin"){champTag.classList.add("tag-assassin")};
-                if (champTag.textContent === "Tank"){champTag.classList.add("tag-tank")};
-                if (champTag.textContent === "Marksman"){champTag.classList.add("tag-marksman")};
+                    // adding unique classes for color setting
+                    if (champTag.textContent === "Support"){champTag.classList.add("tag-support")};
+                    if (champTag.textContent === "Fighter"){champTag.classList.add("tag-fighter")};
+                    if (champTag.textContent === "Mage"){champTag.classList.add("tag-mage")};
+                    if (champTag.textContent === "Assassin"){champTag.classList.add("tag-assassin")};
+                    if (champTag.textContent === "Tank"){champTag.classList.add("tag-tank")};
+                    if (champTag.textContent === "Marksman"){champTag.classList.add("tag-marksman")};
 
-                tagContainer.appendChild(champTag);
-           }           
+                    tagContainer.appendChild(champTag);
+            }           
 
-           // container for skills image
-           const skillsContainer = document.createElement("div");
-           skillsContainer.classList.add("champ-info-skills-container");
-           champTagSkillsContainer.appendChild(skillsContainer);
+            // container for skills image
+            const skillsContainer = document.createElement("div");
+            skillsContainer.classList.add("champ-info-skills-container");
+            champTagSkillsContainer.appendChild(skillsContainer);
 
-           // fetching passive
-           const passive = champ.passive.image.full;
-           
-           // display passive
-           const skillP = document.createElement("img");
-           skillP.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/passive/${passive}`;
-           skillP.classList.add("champ-info-skill-img");
-           skillsContainer.appendChild(skillP);
+            // fetching passive
+            const passive = champ.passive.image.full;
+            
+            // display passive
+            const skillP = document.createElement("img");
+            skillP.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/passive/${passive}`;
+            skillP.classList.add("champ-info-skill-img");
+            skillsContainer.appendChild(skillP);
 
-            // fetching and then displaying Q
-           const fetchQ = champ.spells[0].image.full;
+                // fetching and then displaying Q
+            const fetchQ = champ.spells[0].image.full;
 
-           const skillQ = document.createElement("img");
-           skillQ.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchQ}`;
-           skillQ.classList.add("champ-info-skill-img");
-           skillsContainer.appendChild(skillQ);
+            const skillQ = document.createElement("img");
+            skillQ.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchQ}`;
+            skillQ.classList.add("champ-info-skill-img");
+            skillsContainer.appendChild(skillQ);
 
-            // fetching and then displaying W
-           const fetchW = champ.spells[1].image.full;
+                // fetching and then displaying W
+            const fetchW = champ.spells[1].image.full;
 
-           const skillW = document.createElement("img");
-           skillW.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchW}`;
-           skillW.classList.add("champ-info-skill-img");
-           skillsContainer.appendChild(skillW);
+            const skillW = document.createElement("img");
+            skillW.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchW}`;
+            skillW.classList.add("champ-info-skill-img");
+            skillsContainer.appendChild(skillW);
 
-            // fetching and then displaying E
-           const fetchE = champ.spells[2].image.full;
+                // fetching and then displaying E
+            const fetchE = champ.spells[2].image.full;
 
-           const skillE = document.createElement("img");
-           skillE.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchE}`;
-           skillE.classList.add("champ-info-skill-img");
-           skillsContainer.appendChild(skillE);
+            const skillE = document.createElement("img");
+            skillE.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchE}`;
+            skillE.classList.add("champ-info-skill-img");
+            skillsContainer.appendChild(skillE);
 
-            // fetching and then displaying R
-           const fetchR = champ.spells[3].image.full;
+                // fetching and then displaying R
+            const fetchR = champ.spells[3].image.full;
 
-           const skillR = document.createElement("img");
-           skillR.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchR}`;
-           skillR.classList.add("champ-info-skill-img");
-           skillsContainer.appendChild(skillR);
-        })();
+            const skillR = document.createElement("img");
+            skillR.src = `http://ddragon.leagueoflegends.com/cdn/11.21.1/img/spell/${fetchR}`;
+            skillR.classList.add("champ-info-skill-img");
+            skillsContainer.appendChild(skillR);
+            })();
+        }
     })
 }
